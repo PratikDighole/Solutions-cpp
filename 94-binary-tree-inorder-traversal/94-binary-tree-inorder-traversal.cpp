@@ -12,36 +12,17 @@
 class Solution {
 public:
     vector<int> v;
-    vector<int> inorderTraversal(TreeNode* root) {
-        morrisin(root);
+    vector<int> inorderTraversal(TreeNode* root) { 
+        inor(root);
         return v;
     }
-    void morrisin(TreeNode* r)
+    void inor(TreeNode* r)
     {
-        while(r){
-        if(r->left==NULL)
-        {
-            v.push_back(r->val);
-            r=r->right;
-        }else
-        {
-            TreeNode* curr=r->left;
-            while(curr->right && curr->right!=r)
-            {
-                curr=curr->right;
-            }
-            if(curr->right!=NULL)
-            { 
-                curr->right=NULL;
-                v.push_back(r->val);
-                r=r->right;
-            }
-            else{
-                curr->right=r;
-                // curr->right=NULL;
-                r=r->left; 
-            }
-        }
+        if ( r == NULL) return;
+
+        inorderTraversal(r->left);
+        v.push_back(r->val);
+        inorderTraversal(r->right);
     }
-    }
+    
 };
