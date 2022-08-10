@@ -11,22 +11,25 @@
  */
 class Solution {
 public:
-    void levelt(TreeNode* curr,map<int,vector<int>> &m,int lvl)
-    {
-        if(curr==NULL)return;
-        m[lvl].push_back(curr->val);
-        levelt(curr->left,m,lvl+1);
-        levelt(curr->right,m,lvl+1);
-    }
     vector<vector<int>> levelOrder(TreeNode* root) {
-        vector<vector<int>> v;
-        if(root==NULL)return v;
-        map<int,vector<int>> mp;
-        levelt(root,mp,0);
-        for(auto it:mp)
+       vector<vector<int>> ans;
+       if(root==NULL)return ans;
+        queue<TreeNode* >q;
+        q.push(root);
+        while(!q.empty())
         {
-            v.push_back(it.second);
+            int size=q.size();
+            vector<int> v;
+            for(int i=0;i<size;i++)
+            {
+                TreeNode* n1=q.front();
+                q.pop();
+                if(n1->left)q.push(n1->left);
+                if(n1->right)q.push(n1->right);
+                v.push_back(n1->val);
+            }
+            ans.push_back(v);
         }
-        return v;
+        return ans;
     }
 };
