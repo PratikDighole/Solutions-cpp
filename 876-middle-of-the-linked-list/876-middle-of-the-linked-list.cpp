@@ -11,11 +11,11 @@
 class Solution {
 public:
     ListNode* middleNode(ListNode* head) {
-        ListNode* n1=head;
-        while(n1!=NULL && n1->next!=NULL)
+        ListNode* curr=head;
+        while(curr!=NULL && curr->next!=NULL)
         {
             head=head->next;
-            n1=n1->next->next;
+            curr=(curr->next)->next;
         }
         return head;
     }
